@@ -58,33 +58,46 @@
             50% { transform: translateY(-30px) rotate(5deg); }
         }
 
-        /* --- MODIFIED: Fixed Large Aspect Ratio Grid, NO HOVER EFFECT --- */
+        /* Fixed 1:1 Aspect Ratio Grid */
         .poster-card {
             position: relative;
             border-radius: 2rem;
             overflow: hidden;
             background: #111;
-            /* Waa la weyneeyay: hadda waa 4:5 vertical ahaan si ay sawirradu u dhereraan */
-            aspect-ratio: 4 / 5; 
+            aspect-ratio: 1 / 1; 
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
             box-shadow: 0 15px 35px -10px rgba(0,0,0,0.1);
-            /* Saamayntii hover waa laga saaray */
+            cursor: pointer;
+        }
+
+        .poster-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 40px 60px -15px rgba(34, 197, 94, 0.2);
+            z-index: 10;
         }
 
         .poster-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Isbeddelkii scale-ka waa laga saaray */
+            transition: transform 1.2s ease;
         }
 
-        /* --- MODIFIED: Overlay ALWAYS Visible --- */
+        .poster-card:hover .poster-image {
+            transform: scale(1.15);
+        }
+
         .poster-overlay {
             background: linear-gradient(to top, 
                 rgba(6, 78, 59, 0.95) 0%, 
                 rgba(6, 78, 59, 0.3) 60%, 
                 transparent 100%);
-            /* Hadda mar walba way muuqataa */
-            opacity: 1; 
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .poster-card:hover .poster-overlay {
+            opacity: 1;
         }
 
         #mobileMenu.hidden-menu { transform: translateX(100%); }
@@ -192,112 +205,123 @@
     </div>
 </header>
 
- <!-- Work Section - 6 Images with Full View -->
+   <!-- Work Section - 6 Images with Full View -->
 <section id="work" class="py-24 bg-white">
-    <div class="max-w-[1600px] mx-auto px-4">
-        <div class="text-center mb-20">
-            <h2 class="text-green-600 font-bold uppercase tracking-[0.5em] text-[11px] mb-4">Selected Work</h2>
-            <h3 class="text-6xl md:text-8xl font-serif italic text-emerald-950">Showcase</h3>
-            <div class="w-24 h-1 bg-green-500 mx-auto mt-8 rounded-full"></div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <!-- Poster 1 -->
-            <div class="group relative overflow-hidden rounded-[2.5rem] shadow-xl bg-[#111] aspect-[3/4]">
-                <img src="c:\kkkkkkkkkkkkkkkkkkkkkkkkk\coding\252637826569.png" class="w-full h-full object-cover" alt="Work">
-                <div class="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" onclick="openLightbox(this.previousElementSibling.src)">
-                    <button class="px-6 py-3 bg-white text-emerald-900 rounded-full font-bold text-sm uppercase tracking-wider hover:bg-green-500 hover:text-white transition-colors shadow-xl">
-                        View Full Design <i class="fa-solid fa-expand ml-2"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Poster 2 -->
-            <div class="group relative overflow-hidden rounded-[2.5rem] shadow-xl bg-[#111] aspect-[3/4]">
-                <img src="free.png" class="w-full h-full object-cover" alt="Work">
-                <div class="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" onclick="openLightbox(this.previousElementSibling.src)">
-                    <button class="px-6 py-3 bg-white text-emerald-900 rounded-full font-bold text-sm uppercase tracking-wider hover:bg-green-500 hover:text-white transition-colors shadow-xl">
-                        View Full Design <i class="fa-solid fa-expand ml-2"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Poster 3 -->
-            <div class="group relative overflow-hidden rounded-[2.5rem] shadow-xl bg-[#111] aspect-[3/4]">
-                <img src="xalka green.png" class="w-full h-full object-cover" alt="Work">
-                <div class="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" onclick="openLightbox(this.previousElementSibling.src)">
-                    <button class="px-6 py-3 bg-white text-emerald-900 rounded-full font-bold text-sm uppercase tracking-wider hover:bg-green-500 hover:text-white transition-colors shadow-xl">
-                        View Full Design <i class="fa-solid fa-expand ml-2"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Poster 4 -->
-            <div class="group relative overflow-hidden rounded-[2.5rem] shadow-xl bg-[#111] aspect-[3/4]">
-                <img src="ed.png" class="w-full h-full object-cover" alt="Work">
-                <div class="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" onclick="openLightbox(this.previousElementSibling.src)">
-                    <button class="px-6 py-3 bg-white text-emerald-900 rounded-full font-bold text-sm uppercase tracking-wider hover:bg-green-500 hover:text-white transition-colors shadow-xl">
-                        View Full Design <i class="fa-solid fa-expand ml-2"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Poster 5 -->
-            <div class="group relative overflow-hidden rounded-[2.5rem] shadow-xl bg-[#111] aspect-[3/4]">
-                <img src="mockup.jpg" class="w-full h-full object-cover" alt="Work">
-                <div class="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" onclick="openLightbox(this.previousElementSibling.src)">
-                    <button class="px-6 py-3 bg-white text-emerald-900 rounded-full font-bold text-sm uppercase tracking-wider hover:bg-green-500 hover:text-white transition-colors shadow-xl">
-                        View Full Design <i class="fa-solid fa-expand ml-2"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Poster 6 -->
-            <div class="group relative overflow-hidden rounded-[2.5rem] shadow-xl bg-[#111] aspect-[3/4]">
-                <img src="Realistic 3d outdoor advertising billboard sign _ Free Vector.png" class="w-full h-full object-cover" alt="Work">
-                <div class="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" onclick="openLightbox(this.previousElementSibling.src)">
-                    <button class="px-6 py-3 bg-white text-emerald-900 rounded-full font-bold text-sm uppercase tracking-wider hover:bg-green-500 hover:text-white transition-colors shadow-xl">
-                        View Full Design <i class="fa-solid fa-expand ml-2"></i>
-                    </button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- MODAL LIGHTBOX (Kaga dar qaybta ugu hoosaysa ee <body> ka hor) -->
-<div id="lightbox" class="fixed inset-0 z-[200] hidden bg-black/95 backdrop-blur-md flex items-center justify-center p-4">
-    <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-5xl hover:text-green-500 transition-colors z-[210]">
-        <i class="fa-solid fa-xmark"></i>
-    </button>
-    <img id="lightbox-img" src="" class="max-w-full max-h-full rounded-lg shadow-2xl object-contain border border-white/10">
+<div class="max-w-[1600px] mx-auto px-4">
+<div class="text-center mb-20">
+<h2 class="text-green-600 font-bold uppercase tracking-[0.5em] text-[11px] mb-4">Selected Work</h2>
+<h3 class="text-6xl md:text-8xl font-serif italic text-emerald-950">Showcase</h3>
+<div class="w-24 h-1 bg-green-500 mx-auto mt-8 rounded-full"></div>
 </div>
 
-<!-- JAVASCRIPT (Kaga dar qaybta <script>) -->
-<script>
-    function openLightbox(src) {
-        const lightbox = document.getElementById('lightbox');
-        const img = document.getElementById('lightbox-img');
-        img.src = src;
-        lightbox.classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; // Jooji scrolling
-    }
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-    function closeLightbox() {
-        const lightbox = document.getElementById('lightbox');
-        lightbox.classList.add('hidden');
-        document.body.style.overflow = 'auto'; // Dib u fur scrolling
-    }
+<!-- Poster 1 -->
+<div class="group relative overflow-hidden rounded-[2.5rem] shadow-xl bg-[#111] aspect-[3/4]">
+<img src="c:\kkkkkkkkkkkkkkkkkkkkkkkkk\coding\252637826569.png" class="w-full h-full object-cover" alt="Work">
+<div class="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" onclick="openLightbox(this.previousElementSibling.src)">
+<button class="px-6 py-3 bg-white text-emerald-900 rounded-full font-bold text-sm uppercase tracking-wider hover:bg-green-500 hover:text-white transition-colors shadow-xl">
+View Full Design <i class="fa-solid fa-expand ml-2"></i>
+</button>
+</div>
+</div>
 
-    // Xir marka meel bannaanka ah la gujiyo
-    document.getElementById('lightbox').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeLightbox();
-        }
-    });
-</script>
+<!-- Poster 2 -->
+<div class="group relative overflow-hidden rounded-[2.5rem] shadow-xl bg-[#111] aspect-[3/4]">
+<img src="free.png" class="w-full h-full object-cover" alt="Work">
+<div class="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" onclick="openLightbox(this.previousElementSibling.src)">
+<button class="px-6 py-3 bg-white text-emerald-900 rounded-full font-bold text-sm uppercase tracking-wider hover:bg-green-500 hover:text-white transition-colors shadow-xl">
+View Full Design <i class="fa-solid fa-expand ml-2"></i>
+</button>
+</div>
+</div>
+
+<!-- Poster 3 -->
+<div class="group relative overflow-hidden rounded-[2.5rem] shadow-xl bg-[#111] aspect-[3/4]">
+<img src="xalka green.png" class="w-full h-full object-cover" alt="Work">
+<div class="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" onclick="openLightbox(this.previousElementSibling.src)">
+<button class="px-6 py-3 bg-white text-emerald-900 rounded-full font-bold text-sm uppercase tracking-wider hover:bg-green-500 hover:text-white transition-colors shadow-xl">
+View Full Design <i class="fa-solid fa-expand ml-2"></i>
+</button>
+</div>
+</div>
+
+<!-- Poster 4 -->
+<div class="group relative overflow-hidden rounded-[2.5rem] shadow-xl bg-[#111] aspect-[3/4]">
+<img src="ed.png" class="w-full h-full object-cover" alt="Work">
+<div class="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" onclick="openLightbox(this.previousElementSibling.src)">
+<button class="px-6 py-3 bg-white text-emerald-900 rounded-full font-bold text-sm uppercase tracking-wider hover:bg-green-500 hover:text-white transition-colors shadow-xl">
+View Full Design <i class="fa-solid fa-expand ml-2"></i>
+</button>
+</div>
+</div>
+
+<!-- Poster 5 -->
+<div class="group relative overflow-hidden rounded-[2.5rem] shadow-xl bg-[#111] aspect-[3/4]">
+<img src="mockup.jpg" class="w-full h-full object-cover" alt="Work">
+<div class="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" onclick="openLightbox(this.previousElementSibling.src)">
+<button class="px-6 py-3 bg-white text-emerald-900 rounded-full font-bold text-sm uppercase tracking-wider hover:bg-green-500 hover:text-white transition-colors shadow-xl">
+View Full Design <i class="fa-solid fa-expand ml-2"></i>
+</button>
+</div>
+</div>
+
+<!-- Poster 6 -->
+<div class="group relative overflow-hidden rounded-[2.5rem] shadow-xl bg-[#111] aspect-[3/4]">
+<img src="Realistic 3d outdoor advertising billboard sign _ Free Vector.png" class="w-full h-full object-cover" alt="Work">
+<div class="absolute inset-0 flex items-center justify-center bg-emerald-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer" onclick="openLightbox(this.previousElementSibling.src)">
+<button class="px-6 py-3 bg-white text-emerald-900 rounded-full font-bold text-sm uppercase tracking-wider hover:bg-green-500 hover:text-white transition-colors shadow-xl">
+View Full Design <i class="fa-solid fa-expand ml-2"></i>
+</button>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+
+    <!-- Apps & Tools Section -->
+    <section id="tools" class="py-32 px-6 bg-emerald-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24">
+                <h2 class="text-xs uppercase tracking-[0.5em] text-green-600 font-bold mb-4">Software Mastery</h2>
+                <h3 class="text-5xl md:text-7xl font-serif italic text-emerald-950">Qalabka aan u Adeegsado</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <!-- Photoshop -->
+                <div class="tool-box p-10 rounded-[2.5rem] bg-white border border-green-100">
+                    <div class="w-20 h-20 bg-[#001e36] rounded-2xl mx-auto mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop" class="w-12 h-12">
+                    </div>
+                    <h4 class="font-extrabold text-emerald-950 text-xs tracking-widest uppercase">Photoshop</h4>
+                </div>
+                <!-- Illustrator -->
+                <div class="tool-box p-10 rounded-[2.5rem] bg-white border border-green-100">
+                    <div class="w-20 h-20 bg-[#330000] rounded-2xl mx-auto mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg" alt="Illustrator" class="w-12 h-12">
+                    </div>
+                    <h4 class="font-extrabold text-emerald-950 text-xs tracking-widest uppercase">Illustrator</h4>
+                </div>
+                <!-- Affinity -->
+                <div class="tool-box p-10 rounded-[2.5rem] bg-white border border-B2F179">
+                    <div class="w-20 h-20 bg-gradient-to-br from-[B2F179] to-[#5a3eff] rounded-2xl mx-auto mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="gg.svg" alt="Affinity" class="w-18 h-18 object-contain" onerror="this.src='https://via.placeholder.com/48?text=AD'">
+                    </div>
+                    <h4 class="font-extrabold text-emerald-950 text-xs tracking-widest uppercase">Affinity</h4>
+                </div>
+                <!-- Figma -->
+                <div class="tool-box p-10 rounded-[2.5rem] bg-white border border-green-100">
+                    <div class="w-20 h-20 bg-[#1e1e1e] rounded-2xl mx-auto mb-6 flex items-center justify-center overflow-hidden text-white">
+                        <svg width="40" height="40" viewBox="0 0 38 57" fill="none"><path d="M19 28.5C19 23.2533 14.7467 19 9.5 19C4.25325 19 0 23.2533 0 28.5C0 33.7467 4.25325 38 9.5 38C14.7467 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/><path d="M0 47.5C0 42.2533 4.25325 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25325 57 0 52.7467 0 47.5Z" fill="#0ACF83"/><path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25325 33.7467 0 28.5 0H19Z" fill="#FF7262"/><path d="M0 9.5C0 14.7467 4.25325 19 9.5 19H19V0H9.5C4.25325 0 0 4.25325 0 9.5Z" fill="#F24E1E"/><path d="M19 19V38H28.5C33.7467 38 38 33.7467 38 28.5C38 23.2533 33.7467 19 28.5 19H19Z" fill="#A259FF"/></svg>
+                    </div>
+                    <h4 class="font-extrabold text-emerald-950 text-xs tracking-widest uppercase">Figma</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- SOCIAL CONTACT SECTION -->
     <section id="contact" class="py-32 px-6 bg-white overflow-hidden relative">
         <div class="blob top-[20%] right-[-10%] opacity-30 scale-75"></div>
@@ -318,7 +342,7 @@
                 </a>
 
                 <!-- TikTok Card -->
-                <a href="https://tiktok.com/@isaamplus" class="social-card group p-12 rounded-[3.5rem] bg-[#000000] text-white shadow-2xl shadow-gray-400">
+                <a href="https://tiktok.com/@isaammafia" class="social-card group p-12 rounded-[3.5rem] bg-[#000000] text-white shadow-2xl shadow-gray-400">
                     <div class="flex flex-col items-center">
                         <div class="w-24 h-24 bg-white/10 rounded-full flex items-center justify-center mb-8">
                             <i class="fa-brands fa-tiktok text-5xl"></i>
