@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISAAM | Graphic Design Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --accent: #22c55e;
+            --accent-dark: #16a34a;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f0fdf4;
+            color: #064e3b;
+            scroll-behavior: smooth;
+        }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        
+        /* Glass Navigation */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.1);
+        }
+
+        .green-gradient-text {
+            background: linear-gradient(to right, #15803d, #22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- ADVANCED ANIMATIONS --- */
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(134, 239, 172, 0.2) 100%);
+            filter: blur(80px);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: blob-morph 10s linear infinite alternate;
+            z-index: -1;
+        }
+        @keyframes blob-morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: translate(0, 0) rotate(0deg); }
+            100% { border-radius: 50% 50% 30% 70% / 50% 60% 40% 50%; transform: translate(20px, 40px) rotate(45deg); }
+        }
+
+        .float-slow { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        /* Fixed 1:1 Aspect Ratio Grid */
+        .poster-card {
+            position: relative;
+            border-radius: 2rem;
+            overflow: hidden;
+            background: #111;
+            aspect-ratio: 1 / 1; 
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            box-shadow: 0 15px 35px -10px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .poster-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 40px 60px -15px rgba(34, 197, 94, 0.2);
+            z-index: 10;
+        }
+
+        .poster-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s ease;
+        }
+
+        .poster-card:hover .poster-image {
+            transform: scale(1.15);
+        }
+
+        .poster-overlay {
+            background: linear-gradient(to top, 
+                rgba(6, 78, 59, 0.95) 0%, 
+                rgba(6, 78, 59, 0.3) 60%, 
+                transparent 100%);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .poster-card:hover .poster-overlay {
+            opacity: 1;
+        }
+
+        #mobileMenu.hidden-menu { transform: translateX(100%); }
+
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #22c55e;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Tool Icon Custom Styles */
+        .tool-box {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .tool-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Social Cards Custom */
+        .social-card {
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .social-card:hover {
+            transform: translateY(-15px) scale(1.02);
+        }
+    </style>
+</head>
+<body class="selection:bg-green-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-[100] glass top-0">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="text-2xl font-bold tracking-tighter text-emerald-900">
+                ISAAM PLUS<span class="text-green-500">.</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-12 font-bold text-[11px] tracking-[0.2em] uppercase">
+                <a href="#tools" class="nav-link hover:text-green-600 transition-colors">Tools</a>
+                <a href="#work" class="nav-link hover:text-green-600 transition-colors">showcase</a>
+                <a href="#contact" class="px-8 py-3 bg-emerald-900 text-white rounded-full hover:bg-green-600 hover:shadow-lg hover:shadow-green-200 transition-all">Contact</a>
+            </div>
+            <button class="md:hidden text-emerald-900" id="menuBtn">
+                <i class="fa-solid fa-bars-staggered text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 z-[90] bg-white hidden-menu transition-transform duration-500 md:hidden flex flex-col justify-center items-center">
+        <div class="flex flex-col space-y-12 text-center text-4xl font-serif italic text-emerald-950">
+            <a href="#tools" onclick="toggleMenu()">Apps</a>
+            <a href="#work" onclick="toggleMenu()">Work</a>
+            <a href="#contact" onclick="toggleMenu()">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-[90vh] flex items-center justify-center pt-20 px-6 overflow-hidden">
+    <div class="blob top-[-10%] left-[-10%]"></div>
+    <div class="blob bottom-[-10%] right-[-10%]" style="animation-delay: -5s"></div>
+
+    <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center">
+        <div class="relative z-10 text-center lg:text-left flex flex-col items-center lg:items-start">
+            <div class="inline-block px-4 py-1 rounded-full bg-green-100 text-green-700 text-[10px] font-bold uppercase tracking-[0.3em] mb-6">
+                Professional Graphic Designer
+            </div>
+            
+            <h1 class="text-5xl sm:text-7xl md:text-8xl xl:text-9xl font-serif italic mb-6 leading-[0.9] text-emerald-950">
+                V i s u a l<br>
+                <span class="green-gradient-text not-italic font-extrabold uppercase tracking-tighter">Imagination</span>
+            </h1>
+
+            <p class="text-lg md:text-2xl text-emerald-800/70 max-w-xl font-light leading-relaxed mb-10">
+                Xalka ganacsigagu wa XARIIF desiner ah.
+            </p>
+
+            <div class="flex flex-row gap-6 justify-center lg:justify-start items-center w-full">
+                <a href="#work" class="px-10 py-5 bg-green-600 text-white rounded-full font-bold shadow-2xl hover:bg-emerald-800 transition-all">
+                    explore my work
+                </a>
+            </div>
+        </div>
+
+        <div class="relative hidden lg:flex justify-center items-center">
+            <div class="relative w-full max-w-md aspect-square">
+                <div class="absolute inset-0 border-[1px] border-green-200 rounded-full animate-[spin_30s_linear_infinite]"></div>
+                <div class="float-slow w-64 h-64 bg-white rounded-[3rem] mx-auto shadow-2xl flex items-center justify-center border border-green-50">
+                     <span class="text-8xl font-serif italic font-bold text-green-600">I</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <!-- Work Section - 6 Professional Cards -->
+    <section id="work" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-24">
+                <h2 class="text-green-600 font-bold uppercase tracking-[0.5em] text-[11px] mb-4">Selected Work</h2>
+                <h3 class="text-5xl md:text-7xl font-serif italic text-emerald-950">Portfolio Posters</h3>
+                <p class="mt-6 text-emerald-800/50 max-w-lg mx-auto uppercase tracking-widest text-[10px]">High resolution works (3000px x 3000px)</p>
+                <div class="w-20 h-1 bg-green-500 mx-auto mt-10 rounded-full"></div>
+            </div>
+
+            <!-- Grid Gallery - 6 Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-14">
+                
+                <!-- Poster 1 -->
+                <div class="poster-card">
+                    <img src="c:\kkkkkkkkkkkkkkkkkkkkkkkkk\coding\252637826569.png" class="poster-image" alt="Poster 1">
+                    <div class="poster-overlay absolute inset-0 p-10 flex flex-col justify-end text-white">
+                        <span class="text-[10px] font-bold tracking-[0.3em] text-green-400 mb-2 uppercase">Identity Design</span>
+                        <h4 class="text-3xl font-serif italic mb-2">Oceanic Pulse</h4>
+                        <p class="text-white/60 text-xs tracking-widest">3000 x 3000 PX</p>
+                    </div>
+                </div>
+
+                <!-- Poster 2 -->
+                <div class="poster-card">
+                    <img src="free.png" class="poster-image" alt="Poster 2">
+                    <div class="poster-overlay absolute inset-0 p-10 flex flex-col justify-end text-white">
+                        <span class="text-[10px] font-bold tracking-[0.3em] text-green-400 mb-2 uppercase">Digital Art</span>
+                        <h4 class="text-3xl font-serif italic mb-2">Modern Chaos</h4>
+                        <p class="text-white/60 text-xs tracking-widest">3000 x 3000 PX</p>
+                    </div>
+                </div>
+
+                <!-- Poster 3 -->
+                <div class="poster-card">
+                    <img src="egence.png" class="poster-image" alt="Poster 3">
+                    <div class="poster-overlay absolute inset-0 p-10 flex flex-col justify-end text-white">
+                        <span class="text-[10px] font-bold tracking-[0.3em] text-green-400 mb-2 uppercase">Brandinggraphic Design</span>
+                        <h4 class="text-3xl font-serif italic mb-2">poster</h4>
+                        <p class="text-white/60 text-xs tracking-widest">3000 x 3000 PX</p>
+                    </div>
+                </div>
+
+                <!-- Poster 4 -->
+                <div class="poster-card">
+                    <img src="ed.png" class="poster-image" alt="Poster 4">
+                    <div class="poster-overlay absolute inset-0 p-10 flex flex-col justify-end text-white">
+                        <span class="text-[10px] font-bold tracking-[0.3em] text-green-400 mb-2 uppercase">somtuna</span>
+                        
+                        
+                    </div>
+                </div>
+
+                <!-- Poster 5 -->
+                <div class="poster-card">
+                    <img src="mockup.jpg" class="poster-image" alt="Poster 5">
+                    <div class="poster-overlay absolute inset-0 p-10 flex flex-col justify-end text-white">
+                        <span class="text-[10px] font-bold tracking-[0.3em] text-green-400 mb-2 uppercase">Branding</span>
+                        
+                        <p class="text-white/60 text-xs tracking-widest">3000 x 3000 PX</p>
+                    </div>
+                </div>
+                <div class="poster-card">
+                    <img src="Realistic 3d outdoor advertising billboard sign _ Free Vector.png" class="poster-image" alt="Poster 5">
+                    <div class="poster-overlay absolute inset-0 p-10 flex flex-col justify-end text-white">
+                        <span class="text-[10px] font-bold tracking-[0.3em] text-green-400 mb-2 uppercase">boodh</span>
+                        <h4 class="text-3xl font-serif italic mb-2">boodh</h4>
+                        <p class="text-white/60 text-xs tracking-widest">3000 x 3000 PX</p>
+                    </div>
+                </div>
+                
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Apps & Tools Section -->
+    <section id="tools" class="py-32 px-6 bg-emerald-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24">
+                <h2 class="text-xs uppercase tracking-[0.5em] text-green-600 font-bold mb-4">Software Mastery</h2>
+                <h3 class="text-5xl md:text-7xl font-serif italic text-emerald-950">Qalabka aan u Adeegsado</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <!-- Photoshop -->
+                <div class="tool-box p-10 rounded-[2.5rem] bg-white border border-green-100">
+                    <div class="w-20 h-20 bg-[#001e36] rounded-2xl mx-auto mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop" class="w-12 h-12">
+                    </div>
+                    <h4 class="font-extrabold text-emerald-950 text-xs tracking-widest uppercase">Photoshop</h4>
+                </div>
+                <!-- Illustrator -->
+                <div class="tool-box p-10 rounded-[2.5rem] bg-white border border-green-100">
+                    <div class="w-20 h-20 bg-[#330000] rounded-2xl mx-auto mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg" alt="Illustrator" class="w-12 h-12">
+                    </div>
+                    <h4 class="font-extrabold text-emerald-950 text-xs tracking-widest uppercase">Illustrator</h4>
+                </div>
+                <!-- Affinity -->
+                <div class="tool-box p-10 rounded-[2.5rem] bg-white border border-B2F179">
+                    <div class="w-20 h-20 bg-gradient-to-br from-[B2F179] to-[#5a3eff] rounded-2xl mx-auto mb-6 flex items-center justify-center overflow-hidden">
+                        <img src="gg.svg" alt="Affinity" class="w-18 h-18 object-contain" onerror="this.src='https://via.placeholder.com/48?text=AD'">
+                    </div>
+                    <h4 class="font-extrabold text-emerald-950 text-xs tracking-widest uppercase">Affinity</h4>
+                </div>
+                <!-- Figma -->
+                <div class="tool-box p-10 rounded-[2.5rem] bg-white border border-green-100">
+                    <div class="w-20 h-20 bg-[#1e1e1e] rounded-2xl mx-auto mb-6 flex items-center justify-center overflow-hidden text-white">
+                        <svg width="40" height="40" viewBox="0 0 38 57" fill="none"><path d="M19 28.5C19 23.2533 14.7467 19 9.5 19C4.25325 19 0 23.2533 0 28.5C0 33.7467 4.25325 38 9.5 38C14.7467 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/><path d="M0 47.5C0 42.2533 4.25325 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25325 57 0 52.7467 0 47.5Z" fill="#0ACF83"/><path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25325 33.7467 0 28.5 0H19Z" fill="#FF7262"/><path d="M0 9.5C0 14.7467 4.25325 19 9.5 19H19V0H9.5C4.25325 0 0 4.25325 0 9.5Z" fill="#F24E1E"/><path d="M19 19V38H28.5C33.7467 38 38 33.7467 38 28.5C38 23.2533 33.7467 19 28.5 19H19Z" fill="#A259FF"/></svg>
+                    </div>
+                    <h4 class="font-extrabold text-emerald-950 text-xs tracking-widest uppercase">Figma</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL CONTACT SECTION -->
+    <section id="contact" class="py-32 px-6 bg-white overflow-hidden relative">
+        <div class="blob top-[20%] right-[-10%] opacity-30 scale-75"></div>
+        <div class="max-w-7xl mx-auto relative z-10 text-center">
+            <h2 class="text-green-800 font-bold uppercase tracking-[0.5em] text-[11px] mb-4">Ila soo xiriir</h2>
+            <h3 class="text-5xl md:text-8xl font-serif italic text-emerald-950 mb-20 leading-tight"> si Aan u wada <span class="green-gradient-text not-italic font-extrabold uppercase tracking-tighter">Shaqeyno</span></h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- WhatsApp Card -->
+                <a href="https://wa.me/252637826569" class="social-card group p-12 rounded-[3.5rem] bg-[#25D366] text-white shadow-2xl shadow-green-200">
+                    <div class="flex flex-col items-center">
+                        <div class="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mb-8">
+                            <i class="fa-brands fa-whatsapp text-5xl"></i>
+                        </div>
+                        <h4 class="text-3xl font-bold mb-4">WhatsApp</h4>
+                        <p class="text-white/80 font-medium">Si toos ah iila hadal</p>
+                    </div>
+                </a>
+
+                <!-- TikTok Card -->
+                <a href="https://tiktok.com/@isaammafia" class="social-card group p-12 rounded-[3.5rem] bg-[#000000] text-white shadow-2xl shadow-gray-400">
+                    <div class="flex flex-col items-center">
+                        <div class="w-24 h-24 bg-white/10 rounded-full flex items-center justify-center mb-8">
+                            <i class="fa-brands fa-tiktok text-5xl"></i>
+                        </div>
+                        <h4 class="text-3xl font-bold mb-4">TikTok</h4>
+                        <p class="text-white/80 font-medium">Daawo naqshadaheyga</p>
+                    </div>
+                </a>
+
+                <!-- Gmail Card -->
+                <a href="mailto:bashiiradan55@gmail.com" class="social-card group p-12 rounded-[3.5rem] bg-[#EA4335] text-white shadow-2xl shadow-red-200">
+                    <div class="flex flex-col items-center">
+                        <div class="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mb-8">
+                            <i class="fa-solid fa-envelope text-5xl"></i>
+                        </div>
+                        <h4 class="text-3xl font-bold mb-4">Gmail</h4>
+                        <p class="text-white/80 font-medium">Soo dir farriin rasmi ah</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="mt-24 pt-12 border-t border-green-50 flex flex-col items-center">
+                <p class="text-emerald-900/60 font-medium mb-4 uppercase tracking-[0.2em] text-xs">freelance</p>
+                <div class="w-1 h-12 bg-green-500 rounded-full"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simple Footer -->
+    <footer class="py-12 px-6 bg-emerald-50 border-t border-green-100">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <a href="#" class="text-xl font-bold tracking-tighter text-emerald-900">
+                ISAAM<span class="text-green-500">.</span>
+            </a>
+            <p class="text-[10px] uppercase tracking-[0.4em] text-emerald-900/40">ISAAM edits and Design &copy; 2024 | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            mobileMenu.classList.toggle('hidden-menu', !isMenuOpen);
+            menuBtn.innerHTML = isMenuOpen ? '<i class="fa-solid fa-xmark text-2xl"></i>' : '<i class="fa-solid fa-bars-staggered text-2xl"></i>';
+        }
+        menuBtn.addEventListener('click', toggleMenu);
+    </script>
+</body>
+</html>
